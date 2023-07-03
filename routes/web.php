@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\searchUserController;
+use App\Http\Controllers\searchOrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/user',  [searchUserController::class, 'allUsers']);
+
+Route::get('/order/{yau}', [searchOrderController::class, 'find']);
+
+Route::get('/order', [searchOrderController::class, 'allOrders']);
