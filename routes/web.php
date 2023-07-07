@@ -22,6 +22,3 @@ Route::get('/', function () {
 
 Route::get('/user',  [searchUserController::class, 'allUsers']);
 
-Route::get('/order/{yau}', [searchOrderController::class, 'find']);
-
-Route::get('/order', [searchOrderController::class, 'allOrders']);

@@ -2,6 +2,18 @@
 <html>
 <head>
     <title>O seu vizinho - Utilizadores</title>
+    <script>
+        function toggleOldman(button, id) {
+            var elements = document.getElementsByClassName(id)
+            for (let i = 0; i < elements.length; i++) {
+                let element = elements[i];
+                if (element.style.display == 'none')
+                element.style.display = '';
+             else
+                element.style.display = 'none';
+            }
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,6 +87,18 @@
             color: #fff;
             background-color: #4c77af;
         }
+        button {
+            border-radius: 4px;
+            border: none;
+            background-color: #4c77af;
+            color: #fff;
+        }
+        button:hover {
+            background-color: #436797;
+        }
+        td.idoso {
+            background-color: rgb(241, 241, 241);
+        }
     </style>
 </head>
 <body>
@@ -82,7 +106,7 @@
     
     <div class="form-container">
         <form action="/user" method="GET">
-            <input type="search" id="phone" name="phone" placeholder="Procurar utilizadores" value="{{ $search ? $search : '' }}">
+            <input type="search" id="search" name="search" placeholder="Procurar utilizadores" value="{{ $search ? $search : '' }}">
             <input type="submit" value="Pesquisar">
             <div class="active-orders">
                 Pedidos ativos:
@@ -97,26 +121,36 @@
             <th>Nome</th>
             <th>Telemóvel</th>
             <th>Email</th>
-            <th>Pronome</th>
             <th>Saldo</th>
+            <th>Pedidos</th>
             <th>Concelho</th>
-            <th>Pedido</th>
-            <th>Último Pedido</th>
-            <th>Subscrição</th>
+            <th>Idosos associados</th>
         </tr>
         @foreach ($users as $user)
         <tr>
-            <td>{{$user['id']}}</td>
-            <td>{{$user['name']}}</td>
-            <td>{{$user['phoneNumber']}}</td>
+            <td>{{$user['user_id']}}</td>
+            <td>{{$user['user_name']}}</td>
+            <td>{{$user['n_telemovel']}}</td>
             <td>{{$user['email']}}</td>
-            <td>{{$user['pronoun']}}</td>
-            <td>{{$user['wallet']}}</td>
+            <td>{{$user['saldo']}}</td>
+            <td>{{$user['pedidos']}}</td>
             <td>{{$user['concelho']}}</td>
-            <td>{{$user['order']}}</td>
-            <td>{{$user['lastOrder']}}</td>
-            <td>{{$user['subscriptionModel']}}</td>
+            <td>
+                    <button onclick="toggleOldman(this, {{$user['user_id']}})">v</button>
+            </td>
         </tr>
+        @foreach ($idosos as $idoso)
+        @if ($idoso->user_id == $user['user_id'])
+        <tr style="display: none" class="{{$user['user_id']}}">
+            <td colspan=8>
+                <input type="text" value="{{$idoso->idoso_nome}}">
+            </td>
+        </tr>
+
+        @else
+        <div></div>
+        @endif
+        @endforeach
         @endforeach
     </table>
 </body>
