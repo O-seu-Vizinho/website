@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Idosos;
+use App\Http\Controllers\elderlyController;
 use Illuminate\Support\Facades\DB;
 
 class searchUserController extends Controller
@@ -13,7 +13,6 @@ class searchUserController extends Controller
         $filter = request('filter');
         $query =  self::allUsersQuery();
         if ($request) {
-
             $query->where('users.n_telemovel', 'LIKE', $request.'%')->orwhere('users.user_name', "LIKE", $request.'%');
         }
     
@@ -24,16 +23,9 @@ class searchUserController extends Controller
                       ->orWhere('users.user_name', 'LIKE', $request.'%');
             })
             ->having('pedidos', '>', 0);
-            //$query->where('order', "NOT LIKE", '0%')->where('phoneNumber', 'LIKE', $request.'%')->orwhere('name', "LIKE", $request.'%');
         }
         $result = $query->get();
-        //$result1 = json_decode(json_encode($result), true);
-        $result2 = self::getUserElderly();
-        /*foreach ($result1 as $user) {
-            $result2 = array_merge($result2, [
-                $user['user_id'] => self::getUserElderly($user['user_id'])
-            ]);
-        }*/
+        $result2 = elderlyController::getElderly();
 
         return view('userslist', ['users' => json_decode(json_encode($result), true),
         'idosos' => $result2,
@@ -51,7 +43,7 @@ class searchUserController extends Controller
         return $result;
     }
 
-    public function getUserElderly() {
-        return $result = Idosos::all();
+    public static function getUser($id) {
+       return User::where('user_id', $id)->first();
     }
 }

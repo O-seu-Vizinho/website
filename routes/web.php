@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\searchUserController;
-use App\Http\Controllers\searchOrderController;
+use App\Http\Controllers\elderlyController;
 
 
 /*
@@ -21,4 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/user',  [searchUserController::class, 'allUsers']);
+
+Route::get('/elderly/{id}', [elderlyController::class, 'getElder']);
+
+Route::get('/elderly/test', function() {
+    return view('elderProfile');
+});
 

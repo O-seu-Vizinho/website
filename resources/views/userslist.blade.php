@@ -36,10 +36,10 @@
             padding: 10px;
             text-align: center;
         }
-        
+
         th {
-            background-color: #c7c7c7be;
-            color: #333;
+            background-color: #4c77af;
+            color:#fff;
         }
         
         td {
@@ -99,6 +99,21 @@
         td.idoso {
             background-color: rgb(241, 241, 241);
         }
+        table.tabela_idoso {
+            margin-top: 0px;
+            border: 4px solid #686868;
+        }
+        th.tabela_idoso {
+            background-color: #c7c7c7be;
+            color: #333;
+        }
+        td.tabela_idoso {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even).tabela_idoso td.tabela_idoso {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -142,8 +157,23 @@
         @foreach ($idosos as $idoso)
         @if ($idoso->user_id == $user['user_id'])
         <tr style="display: none" class="{{$user['user_id']}}">
-            <td colspan=8>
-                <input type="text" value="{{$idoso->idoso_nome}}">
+            <td colspan=8 class="idoso">
+                <table class="tabela_idoso">
+                    <tr class="tabela_idoso">
+                        <th class="tabela_idoso">Id de idoso</th>
+                        <th class="tabela_idoso">Nome</th>
+                        <th class="tabela_idoso">Telemóvel</th>
+                        <th class="tabela_idoso">Data de nascimento</th>
+                        <th class="tabela_idoso">Grau de Autonomia</th>
+                    </tr>
+                    <tr class="tabela_idoso">
+                        <td class="tabela_idoso"><a href="http://127.0.0.1:8000/elderly/{{$idoso->idoso_id}}">{{$idoso->idoso_id}}</a></td>
+                        <td class="tabela_idoso">{{$idoso->idoso_nome}}</td>
+                        <td class="tabela_idoso">{{$idoso->n_telemovel}}</td>
+                        <td class="tabela_idoso">{{$idoso->data_nascimento}}</td>
+                        <td class="tabela_idoso">{{$idoso->grau_autonomia}}</td>
+                    </tr>
+                </table>
             </td>
         </tr>
 
