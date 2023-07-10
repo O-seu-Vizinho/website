@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\searchUserController;
+use App\Http\Controllers\elderlyController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.register');
 });
+
+Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
+
+Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
+
+Route::get('/elderly/test', function() {
+    return view('elderProfile');
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

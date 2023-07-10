@@ -21,6 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'n_telemovel',
+        'data_nascimento',
+        'morada',
+        'concelho',
+        'codigo_postal',
+        'outras_infos',
+        'extra_info'
     ];
 
     /**
@@ -42,4 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function idosos() {
+        return $this->hasMany(Idosos::class);
+    }
 }
