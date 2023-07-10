@@ -17,7 +17,7 @@ use App\Http\Controllers\elderlyController;
 */
 
 Route::get('/', function () {
-    return view('auth.register');
+    return redirect('/register');
 });
 
 Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
