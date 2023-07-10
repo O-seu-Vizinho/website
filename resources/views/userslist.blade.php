@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layouts.app')
+
+@section('content')
     <title>O seu vizinho - Utilizadores</title>
     <script>
         function toggleOldman(button, id) {
@@ -19,19 +19,19 @@
             font-family: Arial, sans-serif;
             font-size: 15px;
         }
-        
+
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-        } 
-        
+        }
+
         th, td {
             padding: 10px;
             text-align: center;
@@ -41,22 +41,22 @@
             background-color: #4c77af;
             color:#fff;
         }
-        
+
         td {
             background-color: #f2f2f2;
         }
-        
+
         tr:nth-child(even) td {
             background-color: #e6e6e6;
         }
-        
+
         input[type="search"] {
             padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 15px;
         }
-        
+
         input[type="submit"] {
             padding: 5px 10px;
             background-color: #4c77af;
@@ -66,11 +66,11 @@
             cursor: pointer;
             font-size: 15px;
         }
-        
+
         input[type="submit"]:hover {
             background-color: #436797;
         }
-        
+
         div.form-container {
             text-align: center;
             margin-bottom: 20px;
@@ -110,15 +110,14 @@
         td.tabela_idoso {
             background-color: #f2f2f2;
         }
-        
+
         tr:nth-child(even).tabela_idoso td.tabela_idoso {
             background-color: #f2f2f2;
         }
     </style>
-</head>
-<body>
+<div class="container">
     <h1>Utilizadores</h1>
-    
+
     <div class="form-container">
         <form action="/user" method="GET">
             <input type="search" id="search" name="search" placeholder="Procurar utilizadores" value="{{ $search ? $search : '' }}">
@@ -129,7 +128,7 @@
             </div>
         </form>
     </div>
-    
+
     <table>
         <tr>
             <th>Id</th>
@@ -143,20 +142,20 @@
         </tr>
         @foreach ($users as $user)
         <tr>
-            <td>{{$user['user_id']}}</td>
-            <td>{{$user['user_name']}}</td>
+            <td>{{$user['id']}}</td>
+            <td>{{$user['name']}}</td>
             <td>{{$user['n_telemovel']}}</td>
             <td>{{$user['email']}}</td>
-            <td>{{$user['saldo']}}</td>
+            <td>{{$user['salldo']}}€</td>
             <td>{{$user['pedidos']}}</td>
             <td>{{$user['concelho']}}</td>
             <td>
-                    <button onclick="toggleOldman(this, {{$user['user_id']}})">v</button>
+                    <button onclick="toggleOldman(this, {{$user['id']}})">v</button>
             </td>
         </tr>
         @foreach ($idosos as $idoso)
-        @if ($idoso->user_id == $user['user_id'])
-        <tr style="display: none" class="{{$user['user_id']}}">
+        @if ($idoso->user_id == $user['id'])
+        <tr style="display: none" class="{{$user['id']}}">
             <td colspan=8 class="idoso">
                 <table class="tabela_idoso">
                     <tr class="tabela_idoso">
@@ -167,8 +166,8 @@
                         <th class="tabela_idoso">Grau de Autonomia</th>
                     </tr>
                     <tr class="tabela_idoso">
-                        <td class="tabela_idoso"><a href="http://127.0.0.1:8000/elderly/{{$idoso->idoso_id}}">{{$idoso->idoso_id}}</a></td>
-                        <td class="tabela_idoso">{{$idoso->idoso_nome}}</td>
+                        <td class="tabela_idoso"><a href="http://127.0.0.1:8000/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
+                        <td class="tabela_idoso">{{$idoso->nome}}</td>
                         <td class="tabela_idoso">{{$idoso->n_telemovel}}</td>
                         <td class="tabela_idoso">{{$idoso->data_nascimento}}</td>
                         <td class="tabela_idoso">{{$idoso->grau_autonomia}}</td>
@@ -183,5 +182,5 @@
         @endforeach
         @endforeach
     </table>
-</body>
-</html>
+</div>
+    @endsection

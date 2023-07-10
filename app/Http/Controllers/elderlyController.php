@@ -9,7 +9,7 @@ use App\Models\Idosos;
 class elderlyController extends Controller
 {
     public function getElder($id) {
-        $idoso = Idosos::where('idoso_id', $id)->first();
+        $idoso = Idosos::where('id', $id)->first();
         $userResponsavel = searchUserController::getUser($idoso->user_id);
         return view('elderProfile', ['idoso' => $idoso, 'user' => $userResponsavel]);
     }

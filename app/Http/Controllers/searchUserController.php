@@ -13,14 +13,14 @@ class searchUserController extends Controller
         $filter = request('filter');
         $query =  self::allUsersQuery();
         if ($request) {
-            $query->where('users.n_telemovel', 'LIKE', $request.'%')->orwhere('users.user_name', "LIKE", $request.'%');
+            $query->where('users.n_telemovel', 'LIKE', $request.'%')->orwhere('users.name', "LIKE", $request.'%');
         }
-    
+
         if($filter) {
             $query = self::allUsersQuery();
             $query->where(function ($query) use ($request) {
                 $query->where('users.n_telemovel', 'LIKE', $request.'%')
-                      ->orWhere('users.user_name', 'LIKE', $request.'%');
+                      ->orWhere('users.name', 'LIKE', $request.'%');
             })
             ->having('pedidos', '>', 0);
         }
@@ -30,20 +30,20 @@ class searchUserController extends Controller
         return view('userslist', ['users' => json_decode(json_encode($result), true),
         'idosos' => $result2,
         'filter' => $filter,
-        'search' => $request 
+        'search' => $request
     ]);
     }
 
     public function allUsersQuery() {
         $result = User::query()
-        ->leftJoin('idosos', 'users.user_id', '=', 'idosos.user_id')
-        ->leftJoin('pedidos', 'idosos.idoso_id', '=', 'pedidos.idoso_id')
-        ->groupBy('users.user_id', 'users.user_name', 'users.n_telemovel', 'users.email', 'users.concelho', 'saldo')
-        ->select('users.user_id', 'users.user_name', DB::raw('count(pedidos.pedido_id) as pedidos'), 'users.n_telemovel', 'users.email', 'users.concelho', 'saldo');
+        ->leftJoin('idosos', 'users.id', '=', 'idosos.user_id')
+        ->leftJoin('pedidos', 'idosos.id', '=', 'pedidos.idoso_id')
+        ->groupBy('users.id', 'users.name', 'users.n_telemovel', 'users.email', 'users.concelho', 'salldo')
+        ->select('users.id', 'users.name', DB::raw('count(pedidos.id) as pedidos'), 'users.n_telemovel', 'users.email', 'users.concelho', 'salldo');
         return $result;
     }
 
     public static function getUser($id) {
-       return User::where('user_id', $id)->first();
+       return User::where('id', $id)->first();
     }
 }

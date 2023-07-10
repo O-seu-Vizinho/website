@@ -17,14 +17,18 @@ use App\Http\Controllers\elderlyController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.register');
 });
 
-Route::get('/user',  [searchUserController::class, 'allUsers']);
+Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
 
-Route::get('/elderly/{id}', [elderlyController::class, 'getElder']);
+Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
 
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
