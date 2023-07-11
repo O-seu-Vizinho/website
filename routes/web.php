@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\searchUserController;
 use App\Http\Controllers\elderlyController;
+use App\Http\Controllers\orderController;
 
 
 /*
@@ -27,4 +28,8 @@ Route::get('/elderly/{id}', [elderlyController::class, 'getElder']);
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 });
+
+Route::get('/order', [orderController::class, 'allOrders']);
+
+Route::get('/order/{id}', [orderController::class, 'getOrder']);
 
