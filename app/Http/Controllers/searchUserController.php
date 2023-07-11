@@ -44,6 +44,6 @@ class searchUserController extends Controller
     }
 
     public static function getUser($id) {
-       return User::where('id', $id)->first();
+       return User::find($id);
     }
 }

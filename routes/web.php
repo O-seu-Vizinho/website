@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\searchUserController;
 use App\Http\Controllers\elderlyController;
+use App\Http\Controllers\searchUserController;
+use App\Http\Controllers\orderController;
 
 
 /*
@@ -24,9 +26,12 @@ Route::post('/createElderlyPost', [elderlyController::class, 'createElderlyPost'
 Route::get('/elderlyAll', [elderlyController::class, 'allElderly'])->middleware('auth');
 Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
+Route::get('/order', [orderController::class, 'allOrders'])->middleware('auth');
+Route::get('/order/{id}', [orderController::class, 'getOrder'])->middleware('auth');
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 })->middleware('auth');
+
 
 
 Auth::routes();
