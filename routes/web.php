@@ -19,14 +19,14 @@ use App\Http\Controllers\elderlyController;
 Route::get('/', function () {
     return redirect('/register');
 });
-
+Route::get('/createElderly', [elderlyController::class, 'createElderly'])->middleware('auth');
+Route::post('/createElderlyPost', [elderlyController::class, 'createElderlyPost'])->name('createIdoso');
+Route::get('/elderlyAll', [elderlyController::class, 'allElderly'])->middleware('auth');
 Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
-
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
-
 Route::get('/elderly/test', function() {
     return view('elderProfile');
-});
+})->middleware('auth');
 
 
 Auth::routes();

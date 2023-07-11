@@ -46,29 +46,10 @@
     </style>
 
     <div class="container">
-        <div class="row justify-content-between align-items-center" style="margin-bottom: 3rem;">
-            <div class="col-md-3 col-sm-12" >
-                <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto; border-radius:10px;margin-top:1rem;">
-                    <h4 style="padding-top: 0.5rem">Saldo</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0€</b></h3>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12" >
-                <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
-                    <h4 style="padding-top: 0.5rem">Idosos</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12" >
-                <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
-                    <h4 style="padding-top: 0.5rem">Transações</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
-                </div>
-            </div>
-        </div>
+
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Vizualizar Pedidos</h2>
-            <a href="/register" class="btn btn-primary">Criar Pedido</a>
+            <h2>Vizualizar Idosos</h2>
+            <a href="/createElderly" class="btn btn-primary">Adicionar Idoso</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
