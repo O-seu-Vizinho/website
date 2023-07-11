@@ -68,7 +68,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Vizualizar Pedidos</h2>
-            <a href="/register" class="btn btn-primary">Criar Pedido</a>
+            <a href="/createOrder" class="btn btn-primary">Criar Pedido</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">

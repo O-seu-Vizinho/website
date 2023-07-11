@@ -166,7 +166,7 @@
                         <th class="tabela_idoso">Grau de Autonomia</th>
                     </tr>
                     <tr class="tabela_idoso">
-                        <td class="tabela_idoso"><a href="http://127.0.0.1:8000/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
+                        <td class="tabela_idoso"><a href="/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
                         <td class="tabela_idoso">{{$idoso->nome}}</td>
                         <td class="tabela_idoso">{{$idoso->n_telemovel}}</td>
                         <td class="tabela_idoso">{{$idoso->data_nascimento}}</td>

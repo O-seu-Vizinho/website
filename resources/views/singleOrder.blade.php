@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>O seu Vizinho - Pedido de {{$idoso->idoso_nome}}</title>
-        <style>
+@extends('layouts.app')
+
+@section('content')
+    <title>O seu Vizinho - Pedido de {{$idoso->idoso_nome}}</title>
+    <style>
             
-        </style>
-    </head>
-    <body>
+    </style>
+    <div class='container'>
         serviço: {{$service->nome}}
-    </body>
-</html>
+    </div>
+    @endsection

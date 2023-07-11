@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
+@extends('layouts.app')
+
+@section('content')
         <title>O seu Vizinho - Pedidos</title>
         <style>
             body {
@@ -37,11 +37,16 @@
             tr:nth-child(even) td {
             background-color: #e6e6e6;
             }
+
+            .align-right {
+                text-align: right;
+            }
         </style>
-    </head>
-    <body>
+    <div class="container">
         <h1>Pedidos</h1>
-        <button type="button" onclick="window.location='{{ "http://127.0.0.1:8000/user" }}'">Criar pedido</button>
+        <div class="align-right">
+            <button type="button" onclick="window.location='{{ "http://127.0.0.1:8000/user" }}'">Criar pedido</button>
+        </div>
         <table>
             <tr>
                 <th>Id</th>
@@ -56,5 +61,5 @@
             </tr>
             @endforeach
         </table>
-    </body>
-</html>
+    </div>
+@endsection

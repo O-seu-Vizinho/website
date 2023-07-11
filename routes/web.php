@@ -28,6 +28,8 @@ Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('aut
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
 Route::get('/order', [orderController::class, 'allOrders'])->middleware('auth');
 Route::get('/order/{id}', [orderController::class, 'getOrder'])->middleware('auth');
+Route::get('/createOrder', [orderController::class, 'createOrder'])->middleware('auth');
+Route::post('/createOrderPost', [orderController::class, 'createOrderPost'])->name('createPedido');
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 })->middleware('auth');
