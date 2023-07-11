@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class orderController extends Controller
 {
     public function allOrders() {
-        return view('orderList', ['orders' => Pedidos::all()]);
+        return view('orderList', ['orders' => Pedidos::orderBy('created_at', 'desc')->get()]);
     }
 
     public function getOrder($id) {
