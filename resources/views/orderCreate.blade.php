@@ -68,7 +68,7 @@
                             <div class="col-md-6"><label class="labels">Tempo de Espera</label><input type="time" class="form-control" name="tespera" required></div>
                         </div>
                         <div class="mt-2 text-center">
-                            <button class="btn btn-primary profile-button" type="submit">Criar</button>
+                            <button class="btn btn-primary profile-button" type="submit" style="background-color:#424242; border: none ">Criar</button>
                         </div>
                     </div>
                 </div>

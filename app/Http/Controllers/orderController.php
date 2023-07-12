@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Idosos;
 use App\Models\Pedidos;
 use App\Models\TipoServico;
+use App\Models\Pagamento;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +15,10 @@ use Illuminate\Support\Facades\Auth;
 class orderController extends Controller
 {
     public function allOrders() {
-        return view('orderList', ['orders' => Pedidos::orderBy('created_at', 'desc')->get()]);
+        $orders = Pedidos::orderBy('created_at', 'desc')->get();
+        $elderly = Idosos::all();
+        $services = TipoServico::all();
+        return view('orderList', ['orders' => $orders, 'services' => $services, 'elderly' => $elderly]);
     }
 
     public function getOrder($id) {
@@ -21,7 +26,9 @@ class orderController extends Controller
         $elder = Idosos::find($order->idoso_id);
         $user = User::find($elder->user_id);
         $service = TipoServico::find($order->service_id);
-        return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service]);
+        $payment = Pagamento::find($order->pagamento_id);
+        $feedback = FeedBack::find($order->feedback_id);
+        return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service, 'payment' => $payment, 'feedback' => $feedback]);
     }
 
     public function createOrder() {
@@ -50,6 +57,16 @@ class orderController extends Controller
         $order->admin_id = Auth::user()->id;
         $order->save();
 
+        return redirect('/order');
+    }
+
+    public function editOrder() {
+        return "yau";
+    }
+
+    public function editOrderPost(Request $request, $id) {
+        $order = Pedidos::find($id);
+        $order->save();
         return redirect('/order');
     }
 
