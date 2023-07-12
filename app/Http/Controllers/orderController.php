@@ -28,7 +28,7 @@ class orderController extends Controller
         $service = TipoServico::find($order->service_id);
         $payment = Pagamento::find($order->pagamento_id);
         $feedback = FeedBack::find($order->feedback_id);
-        return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service, 'payment' => $payment, 'feedback' => $feedback]);
+        return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service, 'payment' => $payment, 'feedback' => $feedback, 'user' => Auth::user()]);
     }
 
     public function createOrder() {

@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <input type="number" style="display: none" value = "1" name="orderId">
+            <input type="number" style="display: none" value = "{{$order}}" name="orderId">
         </form>
     </div>
 </div>

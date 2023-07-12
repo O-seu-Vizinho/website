@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class paymentController extends Controller
 {
-    public function createPayment() {
-        return view('paymentCreate');
+    public function createPayment(Request $request) {
+        return view('paymentCreate', ['order' => $request->orderId]);
     }
 
     public function createPaymentPost(Request $request) {
@@ -17,7 +17,7 @@ class paymentController extends Controller
         $pagamento->custo_servico = $request->custo_serv;
         $pagamento->custo_comicao = $request->custo_com;
         $pagamento->save();
-        $pedido = Pedidos::find(1);
+        $pedido = Pedidos::find($request->orderId);
         $pedido->pagamento_id = $pagamento->id;
         $pedido->save();
         return redirect("/order/" . $request->orderId);

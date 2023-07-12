@@ -52,18 +52,24 @@
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Informações de Pagamento e Faturação</h4>
+                    <h4 class="text-right">Informações de Pagamento</h4>
                 </div>
-
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Custo Total</label><input type="text" class="form-control" name="custototal" value="{{$payment->custo_servico}}" disabled></div>
-                </div>
-                <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Custo Serviço</label><input type="text" class="form-control" name="custoservico" value="{{$payment->custo_servico}}" disabled></div>
                     <div class="col-md-6"><label class="labels">Custo Comissão</label><input type="text" class="form-control" name="custocomissao" value="{{$payment->custo_comicao}}" disabled></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Documentos</label><input type="text" class="form-control" name="documentos" value="Documentos" disabled></div>
+                    <div class="col-md-6"><label class="labels">Custo Total</label><input type="text" class="form-control" name="custototal" value="{{$payment->custo_servico}}" disabled></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Informações de Faturação</h4>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Documentos</label><input type="text" class="form-control" name="documentos" value="Documentos" disabled></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Informação Extra</label><input type="text" class="form-control" name="infoextra" value="Extra" disabled></div>
@@ -77,16 +83,64 @@
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row mt-4 justify-content-center">
-        <div class="col-md-5 border-right">
+        <div class="col-md-5 border-right text-center">
             <div class="p-3 py-5">
-            <button type="button" onclick="window.location='{{ "/createPayment" }}'" class="btn btn-primary">Adicionar Informações de Pagamento</button>
+                <form method="GET" action="{{url('/createPayment')}}">
+                    <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
+                    <input type="submit" class="btn btn-primary" value="Adicionar informações de Pagamento">
+                </form>
             </div>
         </div>
     </div>
     </div>
     </div>
     @endif
-    @if($feedback != null)
+    <div class='container'>
+        <div class="container rounded bg-white">
+            <div class="row mt-4 justify-content-center">
+                <div class="col-md-4 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Informações do Operador</h4>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Operador em Linha</label><input type="text" class="form-control" name="operador" value="{{$user->name}}" disabled></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6"><label class="labels">Tempo em Chamada</label><input type="text" class="form-control" name="tempochamada" value="{{$order->tempo_chamada}}" disabled></div>
+                            <div class="col-md-6"><label class="labels">Tempo em Espera</label><input type="text" class="form-control" name="tempoespera" value="{{$order->tempo_espera}}" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                @if($feedback != null)
+                <div class="col-md-4 border-right">
+                    <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Feedback do Utilizador</h4>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6"><label class="labels">Nota de Atendimento</label><input type="text" class="form-control" name="notaatendimento" value="{{$feedback->atendimento}}" disabled></div>
+                            <div class="col-md-6"><label class="labels">Nota de Serviço</label><input type="text" class="form-control" name="notaservico" value="{{$feedback->serviço}}" disabled></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Feedback Extra</label><input type="text" class="form-control" name="extrafeedback" value="{{$feedback->extra_feedback}}" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                @else
+                <div class="col-md-5 border-right text-center">
+                    <div class="p-3 py-5">
+                        <form method="GET" action="{{url('/createFeedback')}}">
+                            <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
+                            <input type="submit" class="btn btn-primary" value="Adicionar informações de Feedback">
+                        </form>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    <!--<@if($feedback != null)
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row mt-4 justify-content-center">
@@ -119,19 +173,18 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
     @else
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row mt-4 justify-content-center">
-        <div class="col-md-5 border-right">
+        <div class="col-md-5 border-right text-center">
             <div class="p-3 py-5">
-            <button type="button" onclick="window.location='{{ "/createFeedback" }}'" class="btn btn-primary">Adicionar Informações de Feedback</button>
+                <form method="GET" action="{{url('/createFeedback')}}">
+                    <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
+                    <input type="submit" class="btn btn-primary" value="Adicionar informações de Feedback">
+                </form>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    @endif
+    @endif-->
     @endsection
