@@ -28,7 +28,7 @@
 
         button {
             padding: 5px 10px;
-            background-color: #424242;
+            background-color: #17a2b8;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -39,31 +39,12 @@
         button:hover {
             background-color: #000000;
         }
-        .greenCircle {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #1cc416;
-            border: none;
-        }
-        .redCircle {
-            display: inline-flex;
-            justify-content: center;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #c41616;
-            border: none;
-        }
         i {
             font-size: 1.5rem;
         }
 
         .btn {
-            background-color:#000000;
+            background-color:#17a2b8;
             border: none;
             border-radius: 50%;
         }
@@ -75,9 +56,11 @@
         </style>
     <div class="container">
         <h1>Pedidos</h1>
+        @if (Auth::user()->role_id == 1)
         <div style="text-align: right">
-            <button type="button" onclick="window.location='{{ "/createOrder" }}'">Criar pedido</button>
+            <button onclick="window.location='{{ "/createOrder" }}'">Criar pedido</button>
         </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>

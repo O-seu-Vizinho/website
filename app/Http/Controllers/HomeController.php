@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Idosos;
 use App\Models\Pedidos;
 use App\Models\TipoServico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,12 +26,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $elderlybymanagement= Idosos::where('user_id',2)->get();
-        $pedidos = Pedidos::all();
+        $user = Auth::user();
+        if ($user->role_id == 2) 
+            $elderlybymanagement= Idosos::where('user_id',$user->id)->get();
+        else
+            $elderlybymanagement= Idosos::all();
+        $countElderly = $elderlybymanagement->count();
+        $pedidosAll = Pedidos::all();
+        $pedidos = $pedidosAll->sortByDesc('id');
+        if ($request->search) {
+            $pedidos = Pedidos::join('idosos', 'pedidos.idoso_id', '=', 'idosos.id')
+            ->where('nome', 'LIKE', $request->search.'%')
+            ->get();
+        }
         $services = TipoServico::all();
-        return view('home')->with(['elderly'=> $elderlybymanagement,'orders'=>$pedidos, 'services'=>$services ]);
+        $countusers = User::all()->count();
+        return view('home')->with(['elderly'=> $elderlybymanagement,'orders'=>$pedidos, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers]);
     }
 }

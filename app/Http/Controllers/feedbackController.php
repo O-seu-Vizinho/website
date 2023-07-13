@@ -16,6 +16,7 @@ class feedbackController extends Controller
         $feedback = new Feedback;
         $feedback->atendimento = $request->notaatendimento;
         $feedback->serviço = $request->notaservico;
+        $feedback->extra_feedback = $request->extra_feedback;
         $feedback->save();
         $pedido = Pedidos::find($request->orderId);
         $pedido->feedback_id = $feedback->id;

@@ -43,8 +43,9 @@
                     <label class="labels">Outras Informações</label>
                     <textarea class="form-control" name="outras_infos" placeholder="Descreve outras informações " required></textarea>
                 </div>
+                <input type="number" value="{{$userId}}" hidden name="userId">
                 <div class="mt-auto text-center">
-                    <button class="btn btn-primary profile-button" type="submit">Criar</button>
+                    <button class="btn btn-primary profile-button" type="submit" style="background-color: #17a2b8; border: none">Criar</button>
 
                 </div>
             </div>

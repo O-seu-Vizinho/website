@@ -32,7 +32,7 @@
 
         input[type="submit"] {
             padding: 5px 10px;
-            background-color: #424242;
+            background-color: #17a2b8;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -41,11 +41,15 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #000000;
+            background-color: #1592a5;
         }
 
         .table {
             text-align: center;
+        }
+
+        tr, td {
+            background-color: #fff 
         }
 
         .table th,
@@ -124,7 +128,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
                 <tr>
                     <th></th>
@@ -137,6 +141,7 @@
                     <th>Concelho</th>
                     <th>Idosos associados</th>
                     <th>Info</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -168,11 +173,17 @@
                             <i class="fas fa-info-circle"></i>
                         </button>
                     </td>
+                    <td>
+                        <form method="GET" action="/createElderly">
+                            <input type="number" hidden value="{{$user['id']}}" name="userId">
+                            <input type="submit" class="btn btn-primary" style="background-color: #17a2b8; border: none" value="Adicionar Idoso">
+                        </form>
+                    </td>
                 </tr>
                 @foreach ($idosos as $idoso)
                 @if ($idoso->user_id == $user['id'])
                 <tr style="display: none" class="{{$user['id']}}">
-                    <td colspan=10 class="idoso">
+                    <td colspan=11 class="idoso">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
@@ -181,13 +192,15 @@
                                     <th>Telemóvel</th>
                                     <th>Data de nascimento</th>
                                     <th>Grau de Autonomia</th>
+                                    <th></th>
                                 </tr>
                                 <tr>
-                                    <td><a href="/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
+                                    <td>{{$idoso->id}}</td>
                                     <td>{{$idoso->nome}}</td>
                                     <td>{{$idoso->n_telemovel}}</td>
                                     <td>{{$idoso->data_nascimento}}</td>
                                     <td>{{$idoso->grau_autonomia}}</td>
+                                    <td><a href="/elderly/{{$idoso->id}}" class="btn btn-primary" style="background-color: #17a2b8; border: none">Informações</a></td>
                                 </tr>
                             </table>
                         </div>

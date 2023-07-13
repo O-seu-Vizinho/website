@@ -50,30 +50,35 @@
     </style>
 
     <div class="container">
-        <div class="row justify-content-between align-items-center" style="margin-bottom: 3rem;">
+
+        <div class="row justify-content-center align-items-center" style="margin-bottom: 3rem;">
+            @if(Auth::user()->role_id == 2)
             <div class="col-md-3 col-sm-12" >
                 <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto; border-radius:10px;margin-top:1rem;">
                     <h4 style="padding-top: 0.5rem">Saldo</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0€</b></h3>
+                    <h3 style="padding-bottom: 0.5rem"><b>{{Auth::user()->salldo}}€</b></h3>
                 </div>
             </div>
+            @endif
             <div class="col-md-3 col-sm-12" >
                 <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
                     <h4 style="padding-top: 0.5rem">Idosos</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
+                    <h3 style="padding-bottom: 0.5rem"><b>{{$countelderly}}</b></h3>
                 </div>
             </div>
+            @if(Auth::user()->role_id == 2)
             <div class="col-md-3 col-sm-12" >
                 <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
                     <h4 style="padding-top: 0.5rem">Transações</h4>
                     <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
                 </div>
             </div>
+            @endif
             @if (Auth::user()->role_id == 1)
             <div class="col-md-3 col-sm-12" >
                 <a href="/user"><div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
                     <h4 style="padding-top: 0.5rem">Gestores de Conta</h4>
-                    <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
+                    <h3 style="padding-bottom: 0.5rem"><b>{{$countusers}}</b></h3>
                 </div></a>
             </div>
             @endif
@@ -81,8 +86,19 @@
         </div>
         @if (Auth::user()->role_id == 1)
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Vizualizar Pedidos</h2>
-            <a href="/createOrder" class="btn btn-primary">Criar pedidos</a>
+            <h2>Visualizar Pedidos</h2>
+            <div class="form-container">
+                <form action="/home" method="GET" class="d-flex">
+                    <div class="input-group">
+                      <input type="search" id="search" name="search" class="form-control" placeholder="Procurar Pedidos" value="{{ $search ? $search : '' }}">
+                      <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Pesquisar" style="background-color: #17a2b8; border: none">
+                      </div>
+                    </div>
+                  </form>
+                  
+            </div>
+            <a href="/createOrder" class="btn btn-primary" style="background-color: #17a2b8; border: none">Criar pedidos</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -93,9 +109,9 @@
                         <th>Nome do Idoso</th>
                         <th>Serviço</th>
                         <th>Status Pagamento</th>
+                        <th>Status Faturação</th>
                         <th>Status Feedback</th>
                         <th>Data</th>
-                        <th>Informação extra</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -119,13 +135,17 @@
                         @else
                         <td><i class="fa fa-check"></i></td>
                         @endif
+                        @if($order->billed == 0)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
                         @if ($order->feedback_id == NULL)
                         <td><b>X</b></td>
                         @else
                         <td><i class="fa fa-check"></i></td>
                         @endif
                         <td>{{$order->created_at}}</td>
-                        <td>{{$order->extra_info}}</td>
                         <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
 
                     </tr>
@@ -138,8 +158,8 @@
 
         @if (Auth::user()->role_id == 2)
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Vizualizar Idosos</h2>
-            <a href="/createElderly" class="btn btn-primary">Criar Idosos</a>
+            <h2>Visualizar Idosos</h2>
+            <a href="/createElderly" class="btn btn-primary" style="background-color: #17a2b8; border: none">Criar Idosos</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">

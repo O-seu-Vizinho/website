@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Auth;
 class orderController extends Controller
 {
     public function allOrders() {
-        $orders = Pedidos::orderBy('created_at', 'desc')->get();
+        if (Auth::user()->role_id == 1)
+            $orders = Pedidos::orderBy('created_at', 'desc')->get();
+        else
+            $orders = Pedidos::join('idosos', 'idosos.id', '=', 'pedidos.idoso_id')->where('user_id', Auth::user()->id)->orderBy('pedidos.created_at', 'desc')->get();
         $elderly = Idosos::all();
         $services = TipoServico::all();
         return view('orderList', ['orders' => $orders, 'services' => $services, 'elderly' => $elderly]);

@@ -7,6 +7,7 @@ use App\Http\Controllers\searchUserController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\billingController;
 
 
 
@@ -40,6 +41,9 @@ Route::get('/createPayment', [paymentController::class, 'createPayment'])->middl
 Route::post('/createPaymentPost', [paymentController::class, 'createPaymentPost'])->name('createPayment');
 Route::get('/createFeedback', [feedbackController::class, 'createFeedback'])->middleware('auth');
 Route::post('/createFeedbackPost', [feedbackController::class, 'createFeedbackPost'])->name('createFeedback');
+Route::get('/createBilling', [billingController::class, 'createBilling'])->middleware('auth');
+Route::post('/createBillingPost', [billingController::class, 'createBillingPost'])->name('createBilling');
+Route::get('/test', function() { return view('transactionCreate');});
 
 Route::get('/elderly/test', function() {
     return view('elderProfile');
