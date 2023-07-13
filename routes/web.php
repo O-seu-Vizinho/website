@@ -40,6 +40,7 @@ Route::get('/createPayment', [paymentController::class, 'createPayment'])->middl
 Route::post('/createPaymentPost', [paymentController::class, 'createPaymentPost'])->name('createPayment');
 Route::get('/createFeedback', [feedbackController::class, 'createFeedback'])->middleware('auth');
 Route::post('/createFeedbackPost', [feedbackController::class, 'createFeedbackPost'])->name('createFeedback');
+
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 })->middleware('auth');

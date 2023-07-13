@@ -11,7 +11,7 @@
             color: #333;
             margin-bottom: 20px;
             }
-        
+
             .align-right {
                 text-align: right;
             }
@@ -25,7 +25,7 @@
             vertical-align: middle;
         }
 
-            
+
         button {
             padding: 5px 10px;
             background-color: #424242;
@@ -121,7 +121,7 @@
                         <td>{{$order->created_at}}</td>
                         <td>{{$order->extra_info}}</td>
                         <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="bi bi-pencil"></i></button></td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>

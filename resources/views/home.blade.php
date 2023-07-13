@@ -43,6 +43,10 @@
             font-size: 1.2rem;
             color: black;
         }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
     </style>
 
     <div class="container">
@@ -65,29 +69,104 @@
                     <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
                 </div>
             </div>
+            @if (Auth::user()->role_id == 1)
+            <div class="col-md-3 col-sm-12" >
+                <a href="/user"><div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">
+                    <h4 style="padding-top: 0.5rem">Gestores de Conta</h4>
+                    <h3 style="padding-bottom: 0.5rem"><b>0</b></h3>
+                </div></a>
+            </div>
+            @endif
+
         </div>
+        @if (Auth::user()->role_id == 1)
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Vizualizar Pedidos</h2>
-            <a href="/createOrder" class="btn btn-primary">Criar Pedido</a>
+            <a href="/createOrder" class="btn btn-primary">Criar pedidos</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id do Pedido</th>
+                        <th>Id do Idoso</th>
+                        <th>Nome do Idoso</th>
+                        <th>Serviço</th>
+                        <th>Status Pagamento</th>
+                        <th>Status Feedback</th>
+                        <th>Data</th>
+                        <th>Informação extra</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($orders as $order)
+                    <tr>
+                        <td>{{$order->id}}</td>
+                        <td>{{$order->idoso_id}}</td>
+                        @foreach ($elderly as $elder)
+                        @if ($elder->id == $order->idoso_id)
+                        <td>{{$elder->nome}}</td>
+                        @endif
+                        @endforeach
+                        @foreach ($services as $service)
+                        @if ($service->id == $order->service_id)
+                        <td>{{$service->nome}}</td>
+                        @endif
+                        @endforeach
+                        @if ($order->pagamento_id == NULL)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                        @if ($order->feedback_id == NULL)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                        <td>{{$order->created_at}}</td>
+                        <td>{{$order->extra_info}}</td>
+                        <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
+
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endif
+
+
+        @if (Auth::user()->role_id == 2)
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Vizualizar Idosos</h2>
+            <a href="/createElderly" class="btn btn-primary">Criar Idosos</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th></th>
+                        <th>Id</th>
                         <th>Nome</th>
-                        <th>Email</th>
+                        <th>Telemóvel</th>
+
+                        <th>Data de Nascimento</th>
+                        <th>Morada</th>
+                        <th>Concelho</th>
+                        <th>Codigo-Postal</th>
+                        <th>Grau de Autonomia</th>
+
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ( $elderly as $idoso)
                     <tr>
                         <td class="table-avatar" style="text-align: center;">
 
                             <div class="avatar-initials" style="margin: auto;">
                                 @php
-                                $names = explode(' ', "David Gabriel");
+                                $names = explode(' ', $idoso->nome." ".$idoso->pronome );
                                 $initials = '';
                                 foreach ($names as $name) {
                                     $initials .= strtoupper(substr($name, 0, 1));
@@ -97,24 +176,27 @@
                             </div>
 
                         </td>
-                        <td>Teste</td>
-                        <td>Teste</td>
+                        <td>{{$idoso->id}}</td>
+                        <td>{{$idoso->nome." ".$idoso->pronome}}</td>
+                        <td>{{$idoso->n_telemovel}}</td>
+                        <td>{{$idoso->data_nascimento}}</td>
+                        <td>{{$idoso->morada}}</td>
+                        <td>{{$idoso->concelho}}</td>
+                        <td>{{$idoso->codigo_postal}}</td>
+                        <td>{{$idoso->grau_autonomia}}</td>
 
                         <td class="table-icons">
-                            <!--<button class="btn btn-primary" title="Visualizar" data-bs-toggle="tooltip" data-bs-placement="top">
+                            <a href="elderly/{{$idoso->id}}" class="btn btn-primary" title="Visualizar" data-bs-toggle="tooltip" data-bs-placement="top">
                                 <i class="fas fa-eye"></i>
-                            </button>-->
-                            <button class="btn btn-info" title="Informações" data-bs-toggle="modal" data-bs-target="#logsModal">
-                                <i class="fas fa-info-circle"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
-
+                    @endforeach
                 </tbody>
             </table>
         </div>
 
-
+        @endif
     </div>
 
 
