@@ -14,40 +14,13 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-        }
-
-        h1 {
+        h1{
             text-align: center;
             color: #333;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #4c77af;
-            color:#fff;
-        }
-
-        td {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) td {
-            background-color: #e6e6e6;
+            margin-bottom: 30px;
         }
 
         input[type="search"] {
@@ -59,7 +32,7 @@
 
         input[type="submit"] {
             padding: 5px 10px;
-            background-color: #4c77af;
+            background-color: #424242;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -68,12 +41,61 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #436797;
+            background-color: #000000;
         }
 
+        .table {
+            text-align: center;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table-avatar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .table-avatar .avatar-initials {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ccc;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .table-icons .btn {
+            background-color: transparent;
+            border: none;
+        }
+
+        .table-icons .btn i {
+            font-size: 1.2rem;
+            color: black;
+        }
+        .toggle-elders {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 40%;
+            background-color: #424242;
+            color: #fff;
+            border: none;
+            font-size: 14px; /* Adjust the font size as desired */
+        }
         div.form-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,35 +106,7 @@
             border: none;
             border-radius: 4px;
             padding: 5px 10px;
-            color: #fff;
-            background-color: #4c77af;
-        }
-        button {
-            border-radius: 4px;
-            border: none;
-            background-color: #4c77af;
-            color: #fff;
-        }
-        button:hover {
-            background-color: #436797;
-        }
-        td.idoso {
-            background-color: rgb(241, 241, 241);
-        }
-        table.tabela_idoso {
-            margin-top: 0px;
-            border: 4px solid #686868;
-        }
-        th.tabela_idoso {
-            background-color: #c7c7c7be;
-            color: #333;
-        }
-        td.tabela_idoso {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even).tabela_idoso td.tabela_idoso {
-            background-color: #f2f2f2;
+            color: #000000;
         }
     </style>
 <div class="container">
@@ -129,58 +123,87 @@
         </form>
     </div>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Telemóvel</th>
-            <th>Email</th>
-            <th>Saldo</th>
-            <th>Pedidos</th>
-            <th>Concelho</th>
-            <th>Idosos associados</th>
-        </tr>
-        @foreach ($users as $user)
-        <tr>
-            <td>{{$user['id']}}</td>
-            <td>{{$user['name']}}</td>
-            <td>{{$user['n_telemovel']}}</td>
-            <td>{{$user['email']}}</td>
-            <td>{{$user['salldo']}}€</td>
-            <td>{{$user['pedidos']}}</td>
-            <td>{{$user['concelho']}}</td>
-            <td>
-                    <button onclick="toggleOldman(this, {{$user['id']}})">v</button>
-            </td>
-        </tr>
-        @foreach ($idosos as $idoso)
-        @if ($idoso->user_id == $user['id'])
-        <tr style="display: none" class="{{$user['id']}}">
-            <td colspan=8 class="idoso">
-                <table class="tabela_idoso">
-                    <tr class="tabela_idoso">
-                        <th class="tabela_idoso">Id de idoso</th>
-                        <th class="tabela_idoso">Nome</th>
-                        <th class="tabela_idoso">Telemóvel</th>
-                        <th class="tabela_idoso">Data de nascimento</th>
-                        <th class="tabela_idoso">Grau de Autonomia</th>
-                    </tr>
-                    <tr class="tabela_idoso">
-                        <td class="tabela_idoso"><a href="http://127.0.0.1:8000/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
-                        <td class="tabela_idoso">{{$idoso->nome}}</td>
-                        <td class="tabela_idoso">{{$idoso->n_telemovel}}</td>
-                        <td class="tabela_idoso">{{$idoso->data_nascimento}}</td>
-                        <td class="tabela_idoso">{{$idoso->grau_autonomia}}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Telemóvel</th>
+                    <th>Email</th>
+                    <th>Saldo</th>
+                    <th>Pedidos</th>
+                    <th>Concelho</th>
+                    <th>Idosos associados</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        @else
-        <div></div>
-        @endif
-        @endforeach
-        @endforeach
-    </table>
+                @foreach ($users as $user)   
+                <tr>
+                    <td class="table-avatar" style="text-align: center;">
+                        <div class="avatar-initials" style="margin: auto;">
+                            @php
+                            $names = explode(' ', $user['name']);
+                            $initials = '';
+                            foreach ($names as $name) {
+                                $initials .= strtoupper(substr($name, 0, 1));
+                            }
+                            echo $initials;
+                            @endphp
+                        </div>
+                    </td>
+                    <td>{{$user['id']}}</td>
+                    <td>{{$user['name']}}</td>
+                    <td>{{$user['n_telemovel']}}</td>
+                    <td>{{$user['email']}}</td>
+                    <td>{{$user['salldo']}}€</td>
+                    <td>{{$user['pedidos']}}</td>
+                    <td>{{$user['concelho']}}</td>
+                    <td> <button onclick="toggleOldman(this, {{$user['id']}})" class="toggle-elders">v</button></td>
+                    <td class="table-icons">
+                        <button class="btn btn-info" title="Informações" data-bs-toggle="modal" data-bs-target="#logsModal">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </td>
+                </tr>
+                @foreach ($idosos as $idoso)
+                @if ($idoso->user_id == $user['id'])
+                <tr style="display: none" class="{{$user['id']}}">
+                    <td colspan=10 class="idoso">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Id de idoso</th>
+                                    <th>Nome</th>
+                                    <th>Telemóvel</th>
+                                    <th>Data de nascimento</th>
+                                    <th>Grau de Autonomia</th>
+                                </tr>
+                                <tr>
+                                    <td><a href="/elderly/{{$idoso->id}}">{{$idoso->id}}</a></td>
+                                    <td>{{$idoso->nome}}</td>
+                                    <td>{{$idoso->n_telemovel}}</td>
+                                    <td>{{$idoso->data_nascimento}}</td>
+                                    <td>{{$idoso->grau_autonomia}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                @endif
+                @endforeach
+                @endforeach
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </div>
     @endsection
