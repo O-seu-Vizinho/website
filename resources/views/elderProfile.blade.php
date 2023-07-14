@@ -22,7 +22,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Numero de telemóvel</label><input type="text" class="form-control" name="n_telemovel" value="{{$idoso->n_telemovel}}" disabled></div>
                     <div class="col-md-12"><label class="labels">Data de Nascimento</label><input type="text" class="form-control" name="data_nascimento" value="{{$idoso->data_nascimento}}" disabled></div>
-                    <div class="col-md-12"><label class="labels">Morada</label><input type="text" class="form-control" name="morada" value="{{$idoso->data_nascimento}}" disabled></div>
+                    <div class="col-md-12"><label class="labels">Morada</label><input type="text" class="form-control" name="morada" value="{{$idoso->morada}}" disabled></div>
                     <div class="col-md-12"><label class="labels">Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{$idoso->codigo_postal}}" disabled></div>
                     <div class="col-md-12"><label class="labels">Concelho</label><input type="text" class="form-control" name="concelho" value="{{$idoso->concelho}}" disabled></div>
                 </div>
@@ -47,8 +47,6 @@
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 @endsection

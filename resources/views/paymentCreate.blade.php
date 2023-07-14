@@ -16,7 +16,7 @@
                         <div class="col-md-6"><label class="labels">Custo da Comissão</label><input type="number" class="form-control" name="custo_com" placeholder="número" required></div>
                     </div>
                     <div class="row mt-4 justify-content-center">
-                        <div class="col-md-6 text-center"><button class="btn btn-primary" style="border: none; background-color: #000000">Adicionar Pagamento</button></div>
+                        <div class="col-md-6 text-center"><button class="btn btn-primary" style="border: none; background-color: #17a2b8">Adicionar Pagamento</button></div>
                     </div>
                 </div>
             </div>

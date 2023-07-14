@@ -15,8 +15,12 @@
                         <div class="col-md-6"><label class="labels">Nota do Atendimento</label><input type="number" class="form-control" name="notaatendimento" placeholder="número" required></div>
                         <div class="col-md-6"><label class="labels">Nota do Serviço</label><input type="number" class="form-control" name="notaservico" placeholder="número" required></div>
                     </div>
+                    <div class="row mt-2 justify-content-center">
+                        <label class="labels">Feedback extra</label>
+                        <textarea class="form-control" name="extra_feedback" placeholder="Descrição do feedback" required></textarea>
+                    </div>
                     <div class="row mt-4 justify-content-center">
-                        <div class="col-md-6 text-center"><button class="btn btn-primary" style="border: none; background-color: #000000">Adicionar Feedback</button></div>
+                        <div class="col-md-6 text-center"><button class="btn btn-primary" style="border: none; background-color: #17a2b8">Adicionar Feedback</button></div>
                     </div>
                 </div>
             </div>

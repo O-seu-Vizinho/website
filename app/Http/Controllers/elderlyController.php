@@ -11,7 +11,10 @@ class elderlyController extends Controller
 {
     public function createElderlyPost(Request $request){
         $idoso= new Idosos;
-        $idoso->user_id= Auth::user()->id;
+        if (Auth::user()->role_id == 1)
+            $idoso->user_id=$request->userId;
+        else
+            $idoso->user_id= Auth::user()->id;
         $idoso->nome= $request->nome ;
         $idoso->pronome=$request->pronome;
         $idoso->n_telemovel=$request->n_telemovel;
@@ -26,11 +29,14 @@ class elderlyController extends Controller
 
         return redirect('/elderlyAll');
     }
-    public function createElderly(){
-        return view('elderlyCreate');
+    public function createElderly(Request $request){
+        return view('elderlyCreate', ['userId'=>$request->userId]);
     }
     public function allElderly(){
-        $idosos = Idosos::all();
+        if (Auth::user()->role_id == 1)
+            $idosos = Idosos::all();
+        else
+            $idosos = Idosos::where('user_id', Auth::user()->id)->get();
         return view('elderlyAll')->with(['idosos'=> $idosos]);
     }
     public function getElder($id) {

@@ -4,13 +4,15 @@
     <title>O seu Vizinho - Pedido de {{$idoso->idoso_nome}}</title>
     <style>
            .btn {
-                background-color: #424242;
+                background-color: #17a2b8;
                 border: none;
-           } 
+           }
            .btn:hover {
-                background-color: #000000;
+                background-color: #138697;
            }
     </style>
+
+
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row justify-content-center" >
@@ -34,7 +36,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Número de Pessoas</label><input type="text" class="form-control" name="npessoas" value="{{$order->n_pessoas}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Necessidades Especiais</label><input type="text" class="form-control" name="necessidades" value="{{$idoso->grau_autonomia}}" disabled></div>                
+                    <div class="col-md-6"><label class="labels">Necessidades Especiais</label><input type="text" class="form-control" name="necessidades" value="{{$idoso->grau_autonomia}}" disabled></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Informação Extra</label><input type="text" class="form-control" name="infoextra" value="{{$order->extra_info}}" disabled></div>
@@ -45,28 +47,46 @@
     </div>
     </div>
 
-    @if($payment != null)
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row mt-4 justify-content-center">
+        @if($payment != null)
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Informações de Pagamento</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Custo Serviço</label><input type="text" class="form-control" name="custoservico" value="{{$payment->custo_servico}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Custo Comissão</label><input type="text" class="form-control" name="custocomissao" value="{{$payment->custo_comicao}}" disabled></div>
+                    <div class="col-md-6"><label class="labels">Custo Serviço</label><input type="text" class="form-control" name="custoservico" value="{{$payment->custo_servico}}€" disabled></div>
+                    <div class="col-md-6"><label class="labels">Custo Comissão</label><input type="text" class="form-control" name="custocomissao" value="{{$payment->custo_comicao}}€" disabled></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Custo Total</label><input type="text" class="form-control" name="custototal" value="{{$payment->custo_servico}}" disabled></div>
+                    <div class="col-md-6"><label class="labels">Custo Total</label><input type="text" class="form-control" name="custototal" value="{{ $payment->custo_servico + $payment->custo_comicao }}€" disabled></div>
                 </div>
             </div>
         </div>
+        @else
+            <div class="col-md-5 border-right text-center">
+            <div class="p-3 py-5">
+                @if (Auth::user()->role_id == 1)
+                <form method="GET" action="{{url('/createPayment')}}">
+                    <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
+                    <input type="submit" class="btn btn-primary" value="Adicionar informações de Pagamento">
+                </form>
+                @else
+                Sem informação de pagamento
+                @endif
+            </div>
+            </div>
+        @endif
+        @if($order->billed != 0)
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Informações de Faturação</h4>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Status de Faturação</label><input type="text" class="form-control" name="infoextra" value="Concluído" disabled></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Documentos</label><input type="text" class="form-control" name="documentos" value="Documentos" disabled></div>
@@ -76,25 +96,23 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    @else
-    <div class='container'>
-    <div class="container rounded bg-white">
-    <div class="row mt-4 justify-content-center">
+        @else
         <div class="col-md-5 border-right text-center">
             <div class="p-3 py-5">
-                <form method="GET" action="{{url('/createPayment')}}">
+                @if (Auth::user()->role_id == 1)
+                <form method="GET" action="{{url('/createBilling')}}">
                     <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
-                    <input type="submit" class="btn btn-primary" value="Adicionar informações de Pagamento">
+                    <input type="submit" class="btn btn-primary" value="Confirmar Faturação">
                 </form>
+                @else
+                Sem informações de Faturação
+                @endif
             </div>
         </div>
+        @endif
     </div>
     </div>
     </div>
-    @endif
     <div class='container'>
         <div class="container rounded bg-white">
             <div class="row mt-4 justify-content-center">
@@ -123,17 +141,21 @@
                             <div class="col-md-6"><label class="labels">Nota de Serviço</label><input type="text" class="form-control" name="notaservico" value="{{$feedback->serviço}}" disabled></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Feedback Extra</label><input type="text" class="form-control" name="extrafeedback" value="{{$feedback->extra_feedback}}" disabled></div>
+                            <div class="col-md-12"><label class="labels">Feedback Extra</label><textarea class="form-control" name="extra_feedback" placeholder="Descrição do feedback" disabled>{{$feedback->extra_feedback}}</textarea></div>
                         </div>
                     </div>
                 </div>
                 @else
                 <div class="col-md-5 border-right text-center">
                     <div class="p-3 py-5">
+                        @if (Auth::user()->role_id == 1)
                         <form method="GET" action="{{url('/createFeedback')}}">
                             <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
                             <input type="submit" class="btn btn-primary" value="Adicionar informações de Feedback">
                         </form>
+                        @else
+                        Sem informações de feedback
+                        @endif
                     </div>
                 </div>
                 @endif

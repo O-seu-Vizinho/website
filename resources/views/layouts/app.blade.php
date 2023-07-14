@@ -28,6 +28,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @if (Auth::user() != NULL)
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @if (Route::has('login'))
@@ -38,10 +39,16 @@
                             <a class="nav-link" href="/elderlyAll">Idosos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Conta</a>
+                            <a class="nav-link" href="/order">Pedidos</a>
+                        </li>
+                        @if (Auth::user()->role_id == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user">Gestores de Conta</a>
                         </li>
                         @endif
+                        @endif
                     </ul>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -65,6 +72,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/user/{{Auth::user()->id}}">Perfil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

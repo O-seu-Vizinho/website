@@ -28,7 +28,7 @@
 
         button {
             padding: 5px 10px;
-            background-color: #424242;
+            background-color: #17a2b8;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -39,45 +39,28 @@
         button:hover {
             background-color: #000000;
         }
-        .greenCircle {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #1cc416;
+
+        .table-icons .btn {
+            background-color: transparent;
             border: none;
-        }
-        .redCircle {
-            display: inline-flex;
-            justify-content: center;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #c41616;
-            border: none;
-        }
-        i {
-            font-size: 1.5rem;
         }
 
-        .btn {
-            background-color:#000000;
-            border: none;
-            border-radius: 50%;
-        }
-
-        .btn i {
+        .table-icons .btn i {
             font-size: 1.2rem;
-            color: rgb(255, 255, 255);
+            color: black;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
         }
         </style>
     <div class="container">
         <h1>Pedidos</h1>
+        @if (Auth::user()->role_id == 1)
         <div style="text-align: right">
-            <button type="button" onclick="window.location='{{ "/createOrder" }}'">Criar pedido</button>
+            <button onclick="window.location='{{ "/createOrder" }}'">Adicionar pedido</button>
         </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -87,9 +70,9 @@
                         <th>Nome do Idoso</th>
                         <th>Serviço</th>
                         <th>Status Pagamento</th>
+                        <th>Status Faturação</th>
                         <th>Status Feedback</th>
                         <th>Data</th>
-                        <th>Informação extra</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -109,18 +92,22 @@
                         @endif
                         @endforeach
                         @if ($order->pagamento_id == NULL)
-                        <td><i class="bi bi-x"></i></td>
+                        <td><b>X</b></td>
                         @else
-                        <td><i class="bi bi-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                        @if($order->billed == 0)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
                         @endif
                         @if ($order->feedback_id == NULL)
-                        <td><i class="bi bi-x"></i></td>
+                        <td><b>X</b></td>
                         @else
-                        <td><i class="bi bi-check"></i></td>
+                        <td><i class="fa fa-check"></i></td>
                         @endif
                         <td>{{$order->created_at}}</td>
-                        <td>{{$order->extra_info}}</td>
-                        <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="bi bi-pencil"></i></button></td>
+                        <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
 
                     </tr>
                     @endforeach
