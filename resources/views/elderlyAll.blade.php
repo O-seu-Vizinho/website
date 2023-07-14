@@ -47,7 +47,7 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Vizualizar Idosos</h2>
+            <h2>Visualizar Idosos</h2>
             <a href="/createElderly" class="btn btn-primary" style="background-color: #17a2b8; border:none">Adicionar Idoso</a>
         </div>
         <div class="table-responsive">
@@ -99,9 +99,9 @@
                             <!--<button class="btn btn-primary" title="Visualizar" data-bs-toggle="tooltip" data-bs-placement="top">
                                 <i class="fas fa-eye"></i>
                             </button>-->
-                            <button class="btn btn-info" title="Informações" data-bs-toggle="modal" data-bs-target="#logsModal">
+                            <a href="elderly/{{$idoso->id}}" class="btn btn-info" title="Informações">
                                 <i class="fas fa-info-circle"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

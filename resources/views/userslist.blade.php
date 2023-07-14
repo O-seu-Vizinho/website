@@ -169,8 +169,8 @@
                     <td>{{$user['concelho']}}</td>
                     <td> <button onclick="toggleOldman(this, {{$user['id']}})" class="toggle-elders">v</button></td>
                     <td class="table-icons">
-                        <button class="btn btn-info" title="Informações" data-bs-toggle="modal" data-bs-target="#logsModal">
-                            <i class="fas fa-info-circle"></i>
+                        <button class="btn btn-info" title="Informações" data-bs-toggle="modal" data-bs-target="#logsModal" onclick="window.location='{{ "/user/".$user['id'] }}'">
+                            <i class="fa fa-marker"></i>
                         </button>
                     </td>
                     <td>

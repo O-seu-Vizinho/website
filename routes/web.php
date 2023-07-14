@@ -30,6 +30,7 @@ Route::get('/createElderly', [elderlyController::class, 'createElderly'])->middl
 Route::post('/createElderlyPost', [elderlyController::class, 'createElderlyPost'])->name('createIdoso');
 Route::get('/elderlyAll', [elderlyController::class, 'allElderly'])->middleware('auth');
 Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
+Route::get('/user/{id}', [searchUserController::class, 'singleUser'])->middleware('auth');
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
 Route::get('/order', [orderController::class, 'allOrders'])->middleware('auth');
 Route::get('/order/{id}', [orderController::class, 'getOrder'])->middleware('auth');
@@ -43,7 +44,8 @@ Route::get('/createFeedback', [feedbackController::class, 'createFeedback'])->mi
 Route::post('/createFeedbackPost', [feedbackController::class, 'createFeedbackPost'])->name('createFeedback');
 Route::get('/createBilling', [billingController::class, 'createBilling'])->middleware('auth');
 Route::post('/createBillingPost', [billingController::class, 'createBillingPost'])->name('createBilling');
-Route::get('/test', function() { return view('transactionCreate');});
+Route::get('/createTransaction', [searchUserController::class, 'createTransaction'])->middleware('auth');
+Route::post('/createTransactionPost', [searchUserController::class, 'createTransactionPost'])->name('createTransacao');
 
 Route::get('/elderly/test', function() {
     return view('elderProfile');

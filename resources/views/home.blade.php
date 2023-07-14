@@ -98,7 +98,7 @@
                   </form>
                   
             </div>
-            <a href="/createOrder" class="btn btn-primary" style="background-color: #17a2b8; border: none">Criar pedidos</a>
+            <a href="/createOrder" class="btn btn-primary" style="background-color: #17a2b8; border: none">Adicionar pedido</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -159,7 +159,7 @@
         @if (Auth::user()->role_id == 2)
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Visualizar Idosos</h2>
-            <a href="/createElderly" class="btn btn-primary" style="background-color: #17a2b8; border: none">Criar Idosos</a>
+            <a href="/createElderly" class="btn btn-primary" style="background-color: #17a2b8; border: none">Adicionar Idosos</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
