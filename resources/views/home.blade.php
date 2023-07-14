@@ -86,19 +86,7 @@
         </div>
         @if (Auth::user()->role_id == 1)
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Visualizar Pedidos</h2>
-            <div class="form-container">
-                <form action="/home" method="GET" class="d-flex">
-                    <div class="input-group">
-                      <input type="search" id="search" name="search" class="form-control" placeholder="Procurar Pedidos" value="{{ $search ? $search : '' }}">
-                      <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Pesquisar" style="background-color: #17a2b8; border: none">
-                      </div>
-                    </div>
-                  </form>
-                  
-            </div>
-            <a href="/createOrder" class="btn btn-primary" style="background-color: #17a2b8; border: none">Adicionar pedido</a>
+            <h2>Serviços Diários</h2>
         </div>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -146,7 +134,7 @@
                         <td><i class="fa fa-check"></i></td>
                         @endif
                         <td>{{$order->created_at}}</td>
-                        <td><button type="button" onclick="window.location='{{ "/order/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
+                        <td> <button type="button" onclick="window.location='{{ "/viagemaceite/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
 
                     </tr>
                     @endforeach
