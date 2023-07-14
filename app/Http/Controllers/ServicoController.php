@@ -45,7 +45,9 @@ class ServicoController extends Controller
     public function emviagem(Request $request){
         // Obtenha os dados do formulário
         $servicoId = $request->input('servico_id');
+
         $servico= Servico::find($servicoId);
+
         $servico->viagem_anda=1;
         $servico->save();
         $orderId = $request->input('orderId');
