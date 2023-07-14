@@ -11,6 +11,7 @@ use App\Models\Feedback;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Servico;
 
 
 class orderController extends Controller
@@ -33,7 +34,17 @@ class orderController extends Controller
         $service = TipoServico::find($order->service_id);
         $payment = Pagamento::find($order->pagamento_id);
         $feedback = FeedBack::find($order->feedback_id);
-        return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service, 'payment' => $payment, 'feedback' => $feedback, 'user' => Auth::user(), 'dataAtual'=>$dataAtual]);
+        $journey = Servico::where('pedido_id', $id)->first();
+        return view('singleOrder', ['order' => $order, 'idoso' => $elder,
+         'user' => $user, 'service' => $service,
+          'payment' => $payment, 'feedback' => $feedback,
+           'user' => Auth::user(), 'dataAtual'=>$dataAtual,
+        'journey' => $journey]);
+    }
+
+    public function orderJourney($id) {
+        $journey = Servico::where('pedido_id', $id)->first();
+        return view('checkJourney', ['journey' => $journey]);
     }
 
     public function createOrder() {

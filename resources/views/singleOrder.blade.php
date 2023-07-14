@@ -10,6 +10,13 @@
            .btn:hover {
                 background-color: #138697;
            }
+           .redBall {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: red;
+      margin: 10px;
+    }
     </style>
 
 
@@ -41,8 +48,50 @@
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Informação Extra</label><input type="text" class="form-control" name="infoextra" value="{{$order->extra_info}}" disabled></div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><button class="btn btn-primary" style="background-color: #17a2b8; border: none" onclick="window.location='{{ "/order/".$order->id."/journey" }}'">Acompanhar pedido</button></div>
+                </div>
             </div>
         </div>
+        <!--<div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Informações de Jornada</h4>
+                </div>
+                <div class="row mt-3 justify-content-center">
+                    @if ($journey)
+                    <div class="col-md-12 border-right">
+                        <label class="labels">Viagem Aceite:</label>
+                        @if ($journey->viagem_aceite == 0)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                    </div>
+                    <div class="col-md-12 border-right">
+                        <label class="labels">Em Viagem:</label>
+                        @if ($journey->viagem_anda == 0)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                    </div>
+                    <div class="col-md-12 border-right">
+                        <label class="labels">Viagem Concluída:</label>
+                        @if ($journey->viagem_concluida == 0)
+                        <td><b>X</b></td>
+                        @else
+                        <td><i class="fa fa-check"></i></td>
+                        @endif
+                    </div>
+                    @else
+                    <div class="col-md-12 border-right">
+                        <label class="labels">A processar pedido</label>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>-->
     </div>
     </div>
     </div>

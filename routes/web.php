@@ -35,6 +35,7 @@ Route::get('/user/{id}', [searchUserController::class, 'singleUser'])->middlewar
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
 Route::get('/order', [orderController::class, 'allOrders'])->middleware('auth');
 Route::get('/order/{id}', [orderController::class, 'getOrder'])->name('orderSingle')->middleware('auth');
+Route::get('/order/{id}/journey', [orderController::class, 'orderJourney'])->middleware('auth');
 Route::get('/createOrder', [orderController::class, 'createOrder'])->middleware('auth');
 Route::post('/createOrderPost', [orderController::class, 'createOrderPost'])->name('createPedido');
 Route::get('/editOrder', [orderController::class, 'editOrder'])->middleware('auth');
