@@ -134,7 +134,22 @@
                         <td><i class="fa fa-check"></i></td>
                         @endif
                         <td>{{$order->created_at}}</td>
-                        <td> <button type="button" onclick="window.location='{{ "/viagemaceite/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
+                        @php
+                            $existe=0;
+                        @endphp
+                        @foreach ($servicos as $servico)
+                            @if ($servico->pedido_id == $order->id)
+                            @php
+                                $existe=1;
+                            @endphp
+                                @if ($existe!=1)
+                                <td>  <button type="button" onclick="window.location='{{ "/viagemaceite/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
+                                @endif
+                            @endif
+                        @endforeach
+                        @if ($existe==0)
+                        <td>  <button type="button" onclick="window.location='{{ "/viagemaceite/$order->id" }}'" class="btn btn-info" style="padding: 2px 6px;"><i class="fa fa-marker"></i></button></td>
+                        @endif
 
                     </tr>
                     @endforeach

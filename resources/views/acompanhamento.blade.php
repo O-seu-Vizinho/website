@@ -29,18 +29,18 @@
                             <div class="row mt-2">
                                 <div class="col-md-12"><label class="labels">Nome do Motorista</label><input type="text" class="form-control" name="nome_motorista"
                                     <?php if(isset($servico->viagem_aceite) && $servico->viagem_aceite== 1)
-                                                echo "disabled value='isset($servico->nome_condutor)'";
+                                                echo "disabled value='$servico->nome_condutor'";
                                                  ?> ></div>
                                 <div class="col-md-12"><label class="labels">Marca do Carro</label><input type="text" class="form-control" name="marca_carro" <?php if(isset($servico->viagem_aceite) && $servico->viagem_aceite== 1)
-                                    echo "disabled value='isset($servico->marca_carro)'";
+                                    echo "disabled value='$servico->marca_carro'";
                                      ?>  ></div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Matricula</label><input type="text" class="form-control" name="matricula" <?php if(isset($servico->viagem_aceite) && $servico->viagem_aceite== 1)
-                                    echo "disabled value='isset($servico->matricula)'";
+                                    echo "disabled value='$servico->matricula'";
                                      ?> ></div>
                                 <div class="col-md-12"><label class="labels">Tempo previsto de chegada</label><input type="time" class="form-control" name="tempo_chegada" <?php if(isset($servico->viagem_aceite) && $servico->viagem_aceite== 1)
-                                    echo "disabled value='isset($servico->tempo_chegada)'";
+                                    echo "disabled value='$servico->tempo_chegada'";
                                      ?> ></div>
                             </div>
                                 <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
@@ -55,7 +55,7 @@
                             <h5 style="padding-top: 0.5rem">Em Andamento</h5>
                             <form method="GET"  action="/emviagem">
 
-                                    <div class="col-md-12"><input type="text" class="form-control" value="{{isset($servico->id)}}" name="servico_id"
+                                    <div class="col-md-12"><input type="text" class="form-control" <?php if (isset($servico->id)) echo "value='$servico->id'" ?> name="servico_id"
                                         style=" display: none" ></div>
 
                                     <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
@@ -70,7 +70,7 @@
                             <h5 style="padding-top: 0.5rem">Concluido</h5>
                             <form method="GET"  action="/concluida">
 
-                                <div class="col-md-12"><input type="text" class="form-control" value="{{isset($servico->id)}}" name="servico_id"
+                                <div class="col-md-12"><input type="text" class="form-control" <?php if (isset($servico->id)) echo "value='$servico->id'" ?> name="servico_id"
                                     style=" display: none" ></div>
 
                                 <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">

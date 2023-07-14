@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servico;
 use App\Models\User;
 use App\Models\Idosos;
 use App\Models\Pedidos;
@@ -50,7 +51,7 @@ class HomeController extends Controller
                 $pedidosFiltrados[] = $pedido;
             }
         }
-
+        $servicos = Servico::all();
 
         $pedidos = $pedidosAll->sortByDesc('id');
         if ($request->search) {
@@ -60,6 +61,6 @@ class HomeController extends Controller
         }
         $services = TipoServico::all();
         $countusers = User::all()->count();
-        return view('home')->with(['elderly'=> $elderlybymanagement,'orders'=>$pedidosFiltrados, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers,'dataAtual'=>$dataAtual]);
+        return view('home')->with(['elderly'=> $elderlybymanagement,'servicos'=>$servicos, 'orders'=>$pedidosFiltrados, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers,'dataAtual'=>$dataAtual]);
     }
 }
