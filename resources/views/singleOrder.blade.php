@@ -6,11 +6,13 @@
            .btn {
                 background-color: #17a2b8;
                 border: none;
-           } 
+           }
            .btn:hover {
                 background-color: #138697;
            }
     </style>
+
+
     <div class='container'>
     <div class="container rounded bg-white">
     <div class="row justify-content-center" >
@@ -34,7 +36,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Número de Pessoas</label><input type="text" class="form-control" name="npessoas" value="{{$order->n_pessoas}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Necessidades Especiais</label><input type="text" class="form-control" name="necessidades" value="{{$idoso->grau_autonomia}}" disabled></div>                
+                    <div class="col-md-6"><label class="labels">Necessidades Especiais</label><input type="text" class="form-control" name="necessidades" value="{{$idoso->grau_autonomia}}" disabled></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Informação Extra</label><input type="text" class="form-control" name="infoextra" value="{{$order->extra_info}}" disabled></div>

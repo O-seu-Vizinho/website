@@ -8,6 +8,7 @@ use App\Models\Pedidos;
 use App\Models\TipoServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -29,12 +30,28 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if ($user->role_id == 2) 
+        if ($user->role_id == 2)
             $elderlybymanagement= Idosos::where('user_id',$user->id)->get();
         else
             $elderlybymanagement= Idosos::all();
         $countElderly = $elderlybymanagement->count();
+
+        $dataAtual = Carbon::now()->format('Y-m-d');
+
         $pedidosAll = Pedidos::all();
+        $pedidosFiltrados = [];
+
+        foreach ($pedidosAll as $pedido) {
+            $dataServico = $pedido->data_servico;
+
+
+            if ($dataServico === $dataAtual) {
+
+                $pedidosFiltrados[] = $pedido;
+            }
+        }
+
+
         $pedidos = $pedidosAll->sortByDesc('id');
         if ($request->search) {
             $pedidos = Pedidos::join('idosos', 'pedidos.idoso_id', '=', 'idosos.id')
@@ -43,6 +60,6 @@ class HomeController extends Controller
         }
         $services = TipoServico::all();
         $countusers = User::all()->count();
-        return view('home')->with(['elderly'=> $elderlybymanagement,'orders'=>$pedidos, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers]);
+        return view('home')->with(['elderly'=> $elderlybymanagement,'orders'=>$pedidosFiltrados, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers,'dataAtual'=>$dataAtual]);
     }
 }
