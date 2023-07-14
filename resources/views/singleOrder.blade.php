@@ -53,45 +53,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Informações de Jornada</h4>
-                </div>
-                <div class="row mt-3 justify-content-center">
-                    @if ($journey)
-                    <div class="col-md-12 border-right">
-                        <label class="labels">Viagem Aceite:</label>
-                        @if ($journey->viagem_aceite == 0)
-                        <td><b>X</b></td>
-                        @else
-                        <td><i class="fa fa-check"></i></td>
-                        @endif
-                    </div>
-                    <div class="col-md-12 border-right">
-                        <label class="labels">Em Viagem:</label>
-                        @if ($journey->viagem_anda == 0)
-                        <td><b>X</b></td>
-                        @else
-                        <td><i class="fa fa-check"></i></td>
-                        @endif
-                    </div>
-                    <div class="col-md-12 border-right">
-                        <label class="labels">Viagem Concluída:</label>
-                        @if ($journey->viagem_concluida == 0)
-                        <td><b>X</b></td>
-                        @else
-                        <td><i class="fa fa-check"></i></td>
-                        @endif
-                    </div>
-                    @else
-                    <div class="col-md-12 border-right">
-                        <label class="labels">A processar pedido</label>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div>-->
     </div>
     </div>
     </div>
