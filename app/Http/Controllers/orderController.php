@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servico;
 use App\Models\User;
 use App\Models\Idosos;
 use App\Models\Pedidos;
@@ -36,6 +37,10 @@ class orderController extends Controller
         return view('singleOrder', ['order' => $order, 'idoso' => $elder, 'user' => $user, 'service' => $service, 'payment' => $payment, 'feedback' => $feedback, 'user' => Auth::user(), 'dataAtual'=>$dataAtual]);
     }
 
+    public function orderJourney($id) {
+        $journey = Servico::where('pedido_id', $id)->first();
+        return view('checkJourney', ['journey' => $journey]);
+    }
     public function createOrder() {
         //$user = Auth::user();
         //$idosos = Idosos::where('user_id', $user->id);

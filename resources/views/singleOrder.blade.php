@@ -41,6 +41,9 @@
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Informação Extra</label><input type="text" class="form-control" name="infoextra" value="{{$order->extra_info}}" disabled></div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><button class="btn btn-primary" style="background-color: #17a2b8; border: none" onclick="window.location='{{ "/order/".$order->id."/journey" }}'">Acompanhar pedido</button></div>
+                </div>
             </div>
         </div>
     </div>

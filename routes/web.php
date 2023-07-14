@@ -51,6 +51,8 @@ Route::get('/viagemaceite/{id}', [ServicoController::class, 'viagemaceite'])->na
 Route::get('/viagemaceite2', [ServicoController::class, 'servicoaceite'])->name('servicoaceite');
 Route::get('/emviagem', [ServicoController::class, 'emviagem'])->name('emviagem');
 Route::get('/concluida', [ServicoController::class, 'concluida'])->name('concluida');
+Route::get('/order/{id}/journey', [orderController::class, 'orderJourney'])->middleware('auth');
+
 Route::get('/elderly/test', function() {
     return view('elderProfile');
 })->middleware('auth');
