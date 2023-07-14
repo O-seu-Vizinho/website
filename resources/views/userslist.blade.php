@@ -114,7 +114,7 @@
         }
     </style>
 <div class="container">
-    <h1>Utilizadores</h1>
+    <h1>Gestores de Conta</h1>
 
     <div class="form-container">
         <form action="/user" method="GET">
@@ -140,7 +140,7 @@
                     <th>Pedidos</th>
                     <th>Concelho</th>
                     <th>Idosos associados</th>
-                    <th>Info</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>

@@ -65,7 +65,7 @@
                         <th>Codigo-Postal</th>
                         <th>Grau de Autonomia</th>
 
-                        <th>Ações</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

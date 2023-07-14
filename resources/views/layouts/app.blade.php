@@ -43,7 +43,7 @@
                         </li>
                         @if (Auth::user()->role_id == 1)
                         <li class="nav-item">
-                            <a class="nav-link" href="/user">Utilizadores</a>
+                            <a class="nav-link" href="/user">Gestores de Conta</a>
                         </li>
                         @endif
                         @endif
