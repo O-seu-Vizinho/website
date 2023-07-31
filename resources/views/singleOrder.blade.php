@@ -125,7 +125,7 @@
                             <h4 class="text-right">Informações do Operador</h4>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Operador em Linha</label><input type="text" class="form-control" name="operador" value="{{$user->name}}" disabled></div>
+                            <div class="col-md-12"><label class="labels">Operador em Linha</label><input type="text" class="form-control" name="operador" value="{{$operator->name}}" disabled></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6"><label class="labels">Tempo em Chamada</label><input type="text" class="form-control" name="tempochamada" value="{{$order->tempo_chamada}}" disabled></div>
@@ -165,51 +165,5 @@
             </div>
         </div>
     </div>
-    <!--<@if($feedback != null)
-    <div class='container'>
-    <div class="container rounded bg-white">
-    <div class="row mt-4 justify-content-center">
-        <div class="col-md-4 border-right">
-            <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Informações do Operador</h4>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Operador em Linha</label><input type="text" class="form-control" name="operador" value="Operador em Linha" disabled></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Tempo em Chamada</label><input type="text" class="form-control" name="tempochamada" value="Tempo em Chamada" disabled></div>
-                    <div class="col-md-6"><label class="labels">Tempo em Espera</label><input type="text" class="form-control" name="tempoespera" value="Tempo em Espera" disabled></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 border-right">
-            <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Feedback do Utilizador</h4>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Nota de Atendimento</label><input type="text" class="form-control" name="notaatendimento" value="{{$feedback->atendimento}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Nota de Serviço</label><input type="text" class="form-control" name="notaservico" value="{{$feedback->serviço}}" disabled></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Feedback Extra</label><input type="text" class="form-control" name="extrafeedback" value="{{$feedback->extra_feedback}}" disabled></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @else
-    <div class='container'>
-    <div class="container rounded bg-white">
-    <div class="row mt-4 justify-content-center">
-        <div class="col-md-5 border-right text-center">
-            <div class="p-3 py-5">
-                <form method="GET" action="{{url('/createFeedback')}}">
-                    <input type="text" style=" display: none" value="{{$order->id}}" name="orderId">
-                    <input type="submit" class="btn btn-primary" value="Adicionar informações de Feedback">
-                </form>
-            </div>
-        </div>
-    </div>
-    @endif-->
+
     @endsection

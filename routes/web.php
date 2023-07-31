@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Middleware\checkRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\elderlyController;
-use App\Http\Controllers\searchUserController;
 use App\Http\Controllers\orderController;
-use App\Http\Controllers\paymentController;
-use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\billingController;
+use App\Http\Controllers\elderlyController;
+use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ServicoController;
+use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\searchUserController;
 
 
 
@@ -30,7 +31,7 @@ Route::get('/', function () {
 Route::get('/createElderly', [elderlyController::class, 'createElderly'])->middleware('auth');
 Route::post('/createElderlyPost', [elderlyController::class, 'createElderlyPost'])->name('createIdoso');
 Route::get('/elderlyAll', [elderlyController::class, 'allElderly'])->middleware('auth');
-Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth');
+Route::get('/user',  [searchUserController::class, 'allUsers'])->middleware('auth')->middleware(checkRole::class);
 Route::get('/user/{id}', [searchUserController::class, 'singleUser'])->middleware('auth');
 Route::get('/elderly/{id}', [elderlyController::class, 'getElder'])->middleware('auth');
 Route::get('/order', [orderController::class, 'allOrders'])->middleware('auth');
@@ -52,6 +53,9 @@ Route::get('/viagemaceite2', [ServicoController::class, 'servicoaceite'])->name(
 Route::get('/emviagem', [ServicoController::class, 'emviagem'])->name('emviagem');
 Route::get('/concluida', [ServicoController::class, 'concluida'])->name('concluida');
 Route::get('/order/{id}/journey', [orderController::class, 'orderJourney'])->middleware('auth');
+route::get('/error', function() {
+    return view('error');
+})->middleware('auth');
 
 Route::get('/elderly/test', function() {
     return view('elderProfile');
