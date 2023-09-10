@@ -51,6 +51,26 @@ class HomeController extends Controller
                 $pedidosFiltrados[] = $pedido;
             }
         }
+
+        $pedidosAtivos = [];
+        $authElderIds = [];
+
+        foreach($elderlybymanagement as $elder) {
+            $authElderIds[] = $elder->id;
+        }
+
+        $pedidosUser = Pedidos::whereIn('idoso_id', $authElderIds)->get();
+
+        foreach ($pedidosUser as $pedido) {
+
+            if ($pedido->pagamento_id == NULL) {
+                $pedidosAtivos[] = $pedido;
+            }
+
+        }
+
+        $countPedidosUser = count($pedidosAtivos);
+
         $servicos = Servico::all();
 
         $pedidos = $pedidosAll->sortByDesc('id');
@@ -61,6 +81,6 @@ class HomeController extends Controller
         }
         $services = TipoServico::all();
         $countusers = User::all()->count();
-        return view('home')->with(['elderly'=> $elderlybymanagement,'servicos'=>$servicos, 'orders'=>$pedidosFiltrados, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers,'dataAtual'=>$dataAtual]);
+        return view('home')->with(['elderly'=> $elderlybymanagement,'servicos'=>$servicos, 'orders'=>$pedidosFiltrados, 'services'=>$services, 'search'=>$request->search, 'countelderly' => $countElderly, 'countusers' => $countusers, 'countPedidosUser' => $countPedidosUser, 'dataAtual'=>$dataAtual]);
     }
 }

@@ -59,6 +59,12 @@
                     <h3 style="padding-bottom: 0.5rem"><b>{{Auth::user()->salldo}}€</b></h3>
                 </div>
             </div>
+            <div class="col-md-3 col-sm-12" >
+                <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto; border-radius:10px;margin-top:1rem;">
+                    <h4 style="padding-top: 0.5rem;color: {{$countPedidosUser == 0 ? 'black' : 'red'}};">Pedidos Ativos</h4>
+                    <h3 style="padding-bottom: 0.5rem;color: {{$countPedidosUser == 0 ? 'black' : 'red'}};"><b>{{$countPedidosUser}}</b></h3>
+                </div>
+            </div>
             @endif
             <div class="col-md-3 col-sm-12" >
                 <div class="text-center shadow" style="background-color: #e6e6e6; height:auto;width:auto;border-radius:10px;margin-top:1rem;">

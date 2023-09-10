@@ -26,7 +26,7 @@ use App\Http\Controllers\searchUserController;
 */
 
 Route::get('/', function () {
-    return redirect('/register');
+    return view('homepage');
 });
 Route::get('/createElderly', [elderlyController::class, 'createElderly'])->middleware('auth');
 Route::post('/createElderlyPost', [elderlyController::class, 'createElderlyPost'])->name('createIdoso');
